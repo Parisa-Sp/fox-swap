@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Avatar from "./Avatar";
+import Avatar from "../Kit/Avatar";
 
 export default function Header() {
   return (
