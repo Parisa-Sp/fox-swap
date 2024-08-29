@@ -1,6 +1,7 @@
 import { type ReactNode } from "react";
 import Header from "./Header";
 import BottomSheetNavigationBar from "./BottomSheet";
+import ScoreBar from "../Home/ScoreBar";
 
 type Props = {
   children: ReactNode;
@@ -34,6 +35,7 @@ export default function Layout(props: Props) {
         {children}
 
         <BottomSheetNavigationBar />
+        <ScoreBar />
       </div>
     </div>
   );

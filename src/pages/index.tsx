@@ -30,19 +30,6 @@ export default function Home() {
           onClick={() => setCount((prevCount) => prevCount + 1)}
         />
       </div>
-
-      <div
-        style={{
-          marginTop: "64px",
-          display: "flex",
-          gap: "8px",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Image src={"/dollar.png"} alt="coin" width={24} height={24} />
-        <div style={{ color: "white" }}>{count}</div>
-      </div>
     </div>
   );
 }
