@@ -1,5 +1,6 @@
 import { type ReactNode } from "react";
 import Header from "./Header";
+import BottomSheetNavigationBar from "./BottomSheet";
 
 type Props = {
   children: ReactNode;
@@ -22,13 +23,17 @@ export default function Layout(props: Props) {
       <div
         style={{
           width: "100%",
-          maxWidth: "420px",
+          maxWidth: "512px",
           height: "100%",
           background: "#081529",
+          padding: "32px 16px",
         }}
       >
         <Header />
+
         {children}
+
+        <BottomSheetNavigationBar />
       </div>
     </div>
   );
