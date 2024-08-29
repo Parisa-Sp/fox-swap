@@ -1,13 +1,23 @@
 import Image from "next/image";
+import Link from "next/link";
 
-export default function ScoreBar() {
+type Props = {
+  max: number;
+  current: number;
+};
+
+export default function ScoreBar(props: Props) {
+  const { max, current } = props;
+
   return (
     <div
       style={{
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        marginTop: "90%",
+        position: "absolute",
+        width: "calc(100% - 16px * 2)",
+        bottom: "calc(var(--margin-from-bottom) + 16px)",
       }}
     >
       <div
@@ -19,20 +29,25 @@ export default function ScoreBar() {
         }}
       >
         <Image src={"/dollar.png"} alt="coin" width={24} height={24} />
-        <div style={{ color: "white" }}> 6000/6000</div>
+        <div style={{ color: "white" }}>
+          {current}/{max}
+        </div>
       </div>
 
-      <div
-        style={{
-          color: "white",
-          backgroundColor: "#17223E",
-          borderRadius: "8px",
-          padding: "8px 12px",
-          cursor: "pointer",
-        }}
-      >
-        Boost
-      </div>
+      <Link href={"/about"}>
+        <div
+          style={{
+            color: "#17223E",
+            backgroundColor: "white",
+            borderRadius: "8px",
+            padding: "8px 12px",
+            cursor: "pointer",
+            fontSize: "14px",
+          }}
+        >
+          Boost
+        </div>
+      </Link>
     </div>
   );
 }
