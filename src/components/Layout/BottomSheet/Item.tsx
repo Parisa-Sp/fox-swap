@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 type Props = {
   icon: string;
@@ -10,7 +11,8 @@ export default function BottomSheetNavigationBarItem(props: Props) {
   const { icon, text, route } = props;
 
   return (
-    <div
+    <Link
+      href={route}
       style={{
         width: "32px",
         height: "32px",
@@ -23,6 +25,6 @@ export default function BottomSheetNavigationBarItem(props: Props) {
     >
       <Image src={icon} alt={text} width={20} height={20} />
       <div style={{ color: "white", fontSize: "12px" }}>{text}</div>
-    </div>
+    </Link>
   );
 }

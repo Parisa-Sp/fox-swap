@@ -1,6 +1,8 @@
+import { useRouter } from "next/router";
 import BottomSheetNavigationBarItem from "./Item";
 
 export default function BottomSheetNavigationBar() {
+  const router = useRouter();
   return (
     <div
       style={{
@@ -18,23 +20,23 @@ export default function BottomSheetNavigationBar() {
     >
       <BottomSheetNavigationBarItem
         icon={"/diamond.png"}
-        text={"Earn"}
-        route={"/earn"}
+        text={"Mine"}
+        route={"/mine"}
       />
       <BottomSheetNavigationBarItem
         icon={"/diamond.png"}
-        text={"Earn"}
-        route={"/earn"}
+        text={"Tasks"}
+        route={"/tasks"}
       />
       <BottomSheetNavigationBarItem
         icon={"/diamond.png"}
-        text={"Earn"}
-        route={"/earn"}
+        text={"Invite"}
+        route={"/invite"}
       />
       <BottomSheetNavigationBarItem
         icon={"/diamond.png"}
-        text={"Earn"}
-        route={"/earn"}
+        text={"Stats"}
+        route={"/stats"}
       />
     </div>
   );
