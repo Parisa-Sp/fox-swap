@@ -25,10 +25,9 @@ export default function ScoreBar(props: Props) {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          gap: "4px",
         }}
       >
-        <Image src={"/dollar.png"} alt="coin" width={24} height={24} />
+        <Image src={"/flash.png"} alt="flash" width={24} height={24} />
         <div style={{ color: "white" }}>
           {current}/{max}
         </div>
