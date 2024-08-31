@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 const maxCount = 6000;
 const rate = 10;
-const rechargingSpeed = 1;
+const rechargingSpeed = 10;
 
 export default function Home() {
   const [count, setCount] = useState(maxCount);

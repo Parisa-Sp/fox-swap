@@ -4,13 +4,15 @@ import BottomSheetNavigationBar from "./BottomSheet";
 
 type Props = {
   children: ReactNode;
+  className: string;
 };
 
 export default function Layout(props: Props) {
-  const { children } = props;
+  const { children, className } = props;
 
   return (
     <div
+      className={className}
       style={{
         width: "100vw",
         height: "100vh",
