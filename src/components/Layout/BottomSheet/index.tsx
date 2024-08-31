@@ -21,7 +21,7 @@ export default function BottomSheetNavigationBar() {
       <BottomSheetNavigationBarItem
         icon={"/diamond.png"}
         text={"Mine"}
-        route={"/mine"}
+        route={"/"}
       />
       <BottomSheetNavigationBarItem
         icon={"/diamond.png"}

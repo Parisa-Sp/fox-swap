@@ -8,13 +8,9 @@ type Props = {
   OnlinePalyers: number;
 };
 
-export default function Stats({
-  TotalShare,
-  TotalTouches,
-  TotalPlayers,
-  DailyUsers,
-  OnlinePalyers,
-}: Props) {
+export default function Stats(props: Props) {
+  const { TotalShare, TotalTouches, TotalPlayers, DailyUsers, OnlinePalyers } =
+    props;
   const stats = [
     ["Total Share Balance:", TotalShare],
     ["Total Touches:", TotalTouches],
