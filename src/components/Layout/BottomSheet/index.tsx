@@ -18,23 +18,19 @@ export default function BottomSheetNavigationBar() {
         bottom: "32px",
       }}
     >
+      <BottomSheetNavigationBarItem icon={"hammer"} text={"Mine"} route={"/"} />
       <BottomSheetNavigationBarItem
-        icon={"/diamond.png"}
-        text={"Mine"}
-        route={"/"}
-      />
-      <BottomSheetNavigationBarItem
-        icon={"/diamond.png"}
+        icon={"checkmark"}
         text={"Tasks"}
         route={"/tasks"}
       />
       <BottomSheetNavigationBarItem
-        icon={"/diamond.png"}
+        icon={"invite"}
         text={"Invite"}
         route={"/invite"}
       />
       <BottomSheetNavigationBarItem
-        icon={"/diamond.png"}
+        icon={"coin-dollar"}
         text={"Stats"}
         route={"/stats"}
       />
