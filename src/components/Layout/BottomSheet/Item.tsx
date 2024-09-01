@@ -23,7 +23,10 @@ export default function BottomSheetNavigationBarItem(props: Props) {
         cursor: "pointer",
       }}
     >
-      <i className={`icon-${icon}`} style={{ fontSize: "20px" }} />
+      <i
+        className={`icon-${icon}`}
+        style={{ fontSize: "20px", color: "white" }}
+      />
       <div style={{ color: "white", fontSize: "12px" }}>{text}</div>
     </Link>
   );

@@ -5,10 +5,11 @@ import BottomSheetNavigationBar from "./BottomSheet";
 type Props = {
   children: ReactNode;
   className: string;
+  noLayout: boolean;
 };
 
 export default function Layout(props: Props) {
-  const { children, className } = props;
+  const { children, className, noLayout } = props;
 
   return (
     <div
@@ -31,11 +32,11 @@ export default function Layout(props: Props) {
           padding: "32px 16px",
         }}
       >
-        <Header />
+        {noLayout ? null : <Header />}
 
         {children}
 
-        <BottomSheetNavigationBar />
+        {noLayout ? null : <BottomSheetNavigationBar />}
       </div>
     </div>
   );

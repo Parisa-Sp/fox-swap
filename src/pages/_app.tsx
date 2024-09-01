@@ -28,9 +28,13 @@ const myFont = localFont({
   ],
 });
 
-export default function App({ Component, pageProps }: AppProps) {
+type Props = AppProps & { Component: { noLayout: boolean } };
+
+export default function App({ Component, pageProps }: Props) {
+  const noLayout = Component.noLayout;
+
   return (
-    <Layout className={myFont.className}>
+    <Layout className={myFont.className} noLayout={noLayout}>
       <Component {...pageProps} />
     </Layout>
   );
