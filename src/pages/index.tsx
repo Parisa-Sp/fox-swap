@@ -1,6 +1,6 @@
 import ScoreBar from "@/components/Home/ScoreBar";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const maxCount = 6000;
 const rate = 10;
@@ -9,15 +9,19 @@ const rechargingSpeed = 10;
 export default function Home() {
   const [count, setCount] = useState(maxCount);
 
+  const interval = useRef<NodeJS.Timeout>();
+
   useEffect(() => {
-    const interval = setInterval(() => {
+    if (interval.current) clearInterval(interval.current);
+
+    interval.current = setInterval(() => {
       if (count + rechargingSpeed <= maxCount) {
         setCount((prevCount) => prevCount + rechargingSpeed);
       }
     }, 1000);
 
-    return () => clearInterval(interval);
-  }, []);
+    return () => clearInterval(interval.current);
+  }, [count]);
 
   return (
     <>
@@ -35,6 +39,7 @@ export default function Home() {
             alignItems: "center",
             justifyContent: "center",
             marginTop: "128px",
+            userSelect: "none",
           }}
         >
           <Image
