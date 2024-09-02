@@ -47,7 +47,6 @@ export default function BottomSheet(props: Props) {
           position: "fixed",
           bottom: "-100%",
           left: 0,
-          padding: "12px 24px",
         }}
         onClick={(e) => e.stopPropagation()}
       >

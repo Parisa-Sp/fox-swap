@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import BottomSheet from "../Kit/BottomSheet";
+import BottonSheetContent from "./Content";
 
 type Props = {
   image: string;
@@ -16,22 +17,14 @@ export default function BoostItem(props: Props) {
   return (
     <>
       <BottomSheet isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        <h1>Hello World!</h1>
-        <h1>Hello World!</h1>
-        <h1>Hello World!</h1>
-        <h1>Hello World!</h1>
-        <h1>Hello World!</h1>
-        <h1>Hello World!</h1>
-        <h1>Hello World!</h1>
-        <h1>Hello World!</h1>
-        <h1>Hello World!</h1>
-        <h1>Hello World!</h1>
-        <h1>Hello World!</h1>
-        <h1>Hello World!</h1>
-        <h1>Hello World!</h1>
-        <h1>Hello World!</h1>
-        <h1>Hello World!</h1>
-        <h1>Hello World!</h1>
+        <BottonSheetContent
+          alt="Multitap"
+          src="/dollar.png"
+          title="Multitap"
+          description="Increase amount of TAP you can earn per one tap. +1 per tap for each level."
+          price={600000}
+          level={1}
+        />
       </BottomSheet>
 
       <div

@@ -29,10 +29,10 @@ export default function BottomNavigationBarItem(props: Props) {
     >
       <i
         className={`icon-${icon}`}
-        style={{ fontSize: "20px", color: isActive ? "blue" : "white" }}
+        style={{ fontSize: "20px", color: isActive ? "#539DF3" : "white" }}
       />
 
-      <div style={{ color: isActive ? "blue" : "white", fontSize: "12px" }}>
+      <div style={{ color: isActive ? "#539DF3" : "white", fontSize: "12px" }}>
         {text}
       </div>
     </Link>
