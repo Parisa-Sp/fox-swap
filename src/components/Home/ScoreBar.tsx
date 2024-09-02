@@ -33,7 +33,7 @@ export default function ScoreBar(props: Props) {
         </div>
       </div>
 
-      <Link href={"/about"}>
+      <Link href={"/boost"}>
         <div
           style={{
             color: "#17223E",
