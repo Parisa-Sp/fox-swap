@@ -9,7 +9,7 @@ type Props = {
   level: number;
 };
 
-export default function BottonSheetContent(props: Props) {
+export default function BottomSheetContent(props: Props) {
   const { src, description, price, title, alt, level } = props;
 
   return (

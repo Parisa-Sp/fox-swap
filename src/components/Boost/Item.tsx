@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import BottomSheet from "../Kit/BottomSheet";
-import BottonSheetContent from "./Content";
+import BottomSheetContent from "./Content";
 
 type Props = {
   image: string;
@@ -17,7 +17,7 @@ export default function BoostItem(props: Props) {
   return (
     <>
       <BottomSheet isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        <BottonSheetContent
+        <BottomSheetContent
           alt="Multitap"
           src="/dollar.png"
           title="Multitap"
