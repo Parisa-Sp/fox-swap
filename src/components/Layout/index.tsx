@@ -28,6 +28,7 @@ export default function Layout(props: Props) {
           width: "100%",
           maxWidth: "512px",
           height: "100%",
+          minHeight: "100vh",
           background: "#081529",
           padding: "32px 16px",
         }}

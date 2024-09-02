@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 type Props = {
   icon: string;
@@ -8,6 +9,10 @@ type Props = {
 
 export default function BottomNavigationBarItem(props: Props) {
   const { icon, text, route } = props;
+
+  const path = usePathname();
+
+  const isActive = path === route;
 
   return (
     <Link
@@ -24,9 +29,12 @@ export default function BottomNavigationBarItem(props: Props) {
     >
       <i
         className={`icon-${icon}`}
-        style={{ fontSize: "20px", color: "white" }}
+        style={{ fontSize: "20px", color: isActive ? "blue" : "white" }}
       />
-      <div style={{ color: "white", fontSize: "12px" }}>{text}</div>
+
+      <div style={{ color: isActive ? "blue" : "white", fontSize: "12px" }}>
+        {text}
+      </div>
     </Link>
   );
 }
