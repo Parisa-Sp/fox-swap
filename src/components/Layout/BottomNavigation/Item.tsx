@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 
 type Props = {
@@ -7,7 +6,7 @@ type Props = {
   route: string;
 };
 
-export default function BottomSheetNavigationBarItem(props: Props) {
+export default function BottomNavigationBarItem(props: Props) {
   const { icon, text, route } = props;
 
   return (

@@ -1,6 +1,6 @@
 import { type ReactNode } from "react";
 import Header from "./Header";
-import BottomSheetNavigationBar from "./BottomSheet";
+import BottomNavigationBar from "./BottomNavigation";
 
 type Props = {
   children: ReactNode;
@@ -36,7 +36,7 @@ export default function Layout(props: Props) {
 
         {children}
 
-        {noLayout ? null : <BottomSheetNavigationBar />}
+        {noLayout ? null : <BottomNavigationBar />}
       </div>
     </div>
   );

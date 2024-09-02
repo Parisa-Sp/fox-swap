@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useState } from "react";
+import BottomSheet from "../Kit/BottomSheet";
 
 type Props = {
   image: string;
@@ -13,44 +14,65 @@ export default function BoostItem(props: Props) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        gap: "8px",
-        padding: "8px 16px",
-        alignItems: "center",
-        backgroundColor: "#181A3E",
-        borderRadius: "8px",
-      }}
-      onClick={() => {
-        setIsOpen(true);
-      }}
-    >
-      <Image src={image} alt={"Boost Item"} width={32} height={32} />
+    <>
+      <BottomSheet isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <h1>Hello World!</h1>
+        <h1>Hello World!</h1>
+        <h1>Hello World!</h1>
+        <h1>Hello World!</h1>
+        <h1>Hello World!</h1>
+        <h1>Hello World!</h1>
+        <h1>Hello World!</h1>
+        <h1>Hello World!</h1>
+        <h1>Hello World!</h1>
+        <h1>Hello World!</h1>
+        <h1>Hello World!</h1>
+        <h1>Hello World!</h1>
+        <h1>Hello World!</h1>
+        <h1>Hello World!</h1>
+        <h1>Hello World!</h1>
+        <h1>Hello World!</h1>
+      </BottomSheet>
+
       <div
         style={{
           display: "flex",
-          flexDirection: "column",
-          gap: "6px",
-          color: "white",
+          gap: "8px",
+          padding: "8px 16px",
+          alignItems: "center",
+          backgroundColor: "#181A3E",
+          borderRadius: "8px",
+        }}
+        onClick={() => {
+          setIsOpen(true);
         }}
       >
-        <div>{title}</div>
+        <Image src={image} alt={"Boost Item"} width={32} height={32} />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "6px",
+            color: "white",
+          }}
+        >
+          <div>{title}</div>
 
-        <div style={{ display: "flex", gap: "4px" }}>
-          <Image src={"/dollar.png"} width={16} height={16} alt="alt" />
-          <span style={{ fontSize: "12px" }}>{price}</span>
+          <div style={{ display: "flex", gap: "4px" }}>
+            <Image src={"/dollar.png"} width={16} height={16} alt="alt" />
+            <span style={{ fontSize: "12px" }}>{price}</span>
 
-          {level ? (
-            <>
-              <span style={{ color: "#586072", fontSize: "12px" }}>|</span>{" "}
-              <span style={{ color: "#586072", fontSize: "12px" }}>
-                {level} level
-              </span>
-            </>
-          ) : null}
+            {level ? (
+              <>
+                <span style={{ color: "#586072", fontSize: "12px" }}>|</span>{" "}
+                <span style={{ color: "#586072", fontSize: "12px" }}>
+                  {level} level
+                </span>
+              </>
+            ) : null}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
