@@ -35,7 +35,9 @@ export default function App({ Component, pageProps }: Props) {
 
   return (
     <Layout className={myFont.className} noLayout={noLayout}>
-      <Component {...pageProps} />
+      <div style={{ paddingBottom: "var(--margin-from-bottom)" }}>
+        <Component {...pageProps} />
+      </div>
     </Layout>
   );
 }

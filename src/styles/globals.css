@@ -21,6 +21,8 @@
 */
 body {
   line-height: 1.5;
+  overflow-x: hidden;
+  overflow-y: auto;
   -webkit-font-smoothing: antialiased;
 }
 /*
@@ -71,4 +73,9 @@ a {
 }
 * {
   transition: 0.3s all;
+}
+
+reach-portal{
+  position: relative;
+  z-index: 1000;
 }
