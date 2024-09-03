@@ -1,14 +1,17 @@
 import Image from "next/image";
+import Link from "next/link";
 
 type Props = {
   title: string;
   count: number;
+  route: string;
 };
 
 export default function Task(props: Props) {
-  const { title, count } = props;
+  const { title, count, route } = props;
   return (
-    <div
+    <Link
+      href={route}
       style={{
         display: "flex",
         gap: "4px",
@@ -30,6 +33,6 @@ export default function Task(props: Props) {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
