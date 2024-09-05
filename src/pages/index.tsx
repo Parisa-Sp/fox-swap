@@ -96,6 +96,19 @@ export default function Home() {
         </div>
       </div>
 
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "4px",
+          marginTop: "64px",
+        }}
+      >
+        <Image src={"/dollar.png"} alt="coin" width={24} height={24} />
+        <div style={{ color: "white" }}>{} nemidoonam</div>
+      </div>
+
       <ScoreBar current={count} max={maxCount} />
     </>
   );
