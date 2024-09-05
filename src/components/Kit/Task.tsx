@@ -11,7 +11,7 @@ export default function Task(props: Props) {
   const { title, count, route } = props;
   return (
     <Link
-      href={route}
+      href={`/tasks/${route}`}
       style={{
         display: "flex",
         gap: "4px",

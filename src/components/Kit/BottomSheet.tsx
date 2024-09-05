@@ -55,5 +55,7 @@ export default function BottomSheet(props: Props) {
     </div>
   );
 
-  return isOpen ? createPortal(child, document.body) : null;
+  return isOpen
+    ? createPortal(child, document.getElementById("layout")!)
+    : null;
 }

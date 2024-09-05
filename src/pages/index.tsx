@@ -52,6 +52,16 @@ export default function Home() {
               if (count - rate >= 0) {
                 setCount((prevCount) => prevCount - rate);
 
+                const score = localStorage.getItem("score");
+                if (score) {
+                  localStorage.setItem(
+                    "score",
+                    (Number(score) + rate).toString()
+                  );
+                } else {
+                  localStorage.setItem("score", rate.toString());
+                }
+
                 // [x] get x and y position of click or touch in coin image
                 const x = e.clientX;
                 const y = e.clientY;
@@ -106,7 +116,11 @@ export default function Home() {
         }}
       >
         <Image src={"/dollar.png"} alt="coin" width={24} height={24} />
-        <div style={{ color: "white" }}>{} nemidoonam</div>
+        <div style={{ color: "white" }}>
+          {typeof window === "undefined"
+            ? 0
+            : localStorage.getItem("score") || 0}
+        </div>
       </div>
 
       <ScoreBar current={count} max={maxCount} />
