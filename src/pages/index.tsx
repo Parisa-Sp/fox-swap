@@ -38,7 +38,7 @@ export default function Home() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            marginTop: "128px",
+            marginTop: "96px",
             userSelect: "none",
           }}
         >
@@ -113,6 +113,7 @@ export default function Home() {
           justifyContent: "center",
           gap: "4px",
           marginTop: "64px",
+          marginBottom: "64px",
         }}
       >
         <Image src={"/dollar.png"} alt="coin" width={24} height={24} />

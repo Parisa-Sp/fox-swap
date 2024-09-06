@@ -1,4 +1,4 @@
-import Task from "@/components/Kit/Task";
+import Task from "@/components/Task/Task";
 
 export default function Tasks() {
   return (
@@ -27,9 +27,9 @@ export default function Tasks() {
       </div>
 
       <div>
-        <Task title="Join Our Socials" count={2000000} route="24" />
-        <Task title="Join Our Youtube" count={6000000} route="13" />
-        <Task title="Join Token Youtube Channel" count={1000000} route="15" />
+        <Task title="Join Our Socials" count={2000000} route="1" />
+        <Task title="Join Our Youtube" count={6000000} route="2" />
+        <Task title="Join Token Youtube Channel" count={1000000} route="3" />
       </div>
     </>
   );
