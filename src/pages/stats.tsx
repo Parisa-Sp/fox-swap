@@ -30,8 +30,9 @@ export default function Stats(props: Props) {
         color: "white",
       }}
     >
-      {stats.map(([index, item]) => (
+      {stats.map(([title, item], index) => (
         <div
+          key={index}
           style={{
             display: "flex",
             flexDirection: "column",
@@ -39,7 +40,7 @@ export default function Stats(props: Props) {
             alignItems: "center",
           }}
         >
-          <div>{index}</div>
+          <div>{title}</div>
           <div>{item}</div>
         </div>
       ))}
