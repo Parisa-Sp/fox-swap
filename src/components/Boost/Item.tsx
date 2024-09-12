@@ -4,13 +4,16 @@ import BottomSheet from "../Kit/BottomSheet";
 import BottomSheetContent from "./Content";
 
 type Props = {
+  id: string;
   image: string;
   title: string;
   price: string;
   level: number;
+  description: string;
+  update: VoidFunction;
 };
 export default function BoostItem(props: Props) {
-  const { image, level, price, title } = props;
+  const { image, level, price, title, description, id, update } = props;
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -18,12 +21,17 @@ export default function BoostItem(props: Props) {
     <>
       <BottomSheet isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <BottomSheetContent
-          alt="Multitap"
+          onClose={() => {
+            update();
+            setIsOpen(false);
+          }}
+          id={id}
+          alt={title}
           src="/dollar.png"
-          title="Multitap"
-          description="Increase amount of TAP you can earn per one tap. +1 per tap for each level."
-          price={600000}
-          level={1}
+          title={title}
+          description={description}
+          price={price}
+          level={level}
         />
       </BottomSheet>
 
@@ -55,7 +63,7 @@ export default function BoostItem(props: Props) {
             <Image src={"/dollar.png"} width={16} height={16} alt="alt" />
             <span style={{ fontSize: "12px" }}>{price}</span>
 
-            {level ? (
+            {id !== "offlineBot" ? (
               <>
                 <span style={{ color: "#586072", fontSize: "12px" }}>|</span>{" "}
                 <span style={{ color: "#586072", fontSize: "12px" }}>

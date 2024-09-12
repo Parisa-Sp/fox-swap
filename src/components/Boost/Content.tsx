@@ -1,16 +1,23 @@
+import { SocketInstance } from "@/helpers/socket";
+import { GetInfoAck } from "@/types";
 import Image from "next/image";
+import { useState } from "react";
 
 type Props = {
+  id: string;
   src: string;
   alt: string;
   title: string;
   description: string;
-  price: number;
+  price: string;
   level: number;
+  onClose: VoidFunction;
 };
 
 export default function BottomSheetContent(props: Props) {
-  const { src, description, price, title, alt, level } = props;
+  const { src, description, price, title, alt, level, id, onClose } = props;
+
+  const [isDisabled, setDisabled] = useState(false);
 
   return (
     <div
@@ -30,7 +37,7 @@ export default function BottomSheetContent(props: Props) {
       <div style={{ color: "white" }}>
         <span style={{ fontSize: "12px" }}>{price}</span>
 
-        {level ? (
+        {id !== "offlineBot" ? (
           <>
             <span style={{ fontSize: "14px" }}> | </span>
             <span style={{ fontSize: "14px" }}>{level} level</span>
@@ -39,6 +46,23 @@ export default function BottomSheetContent(props: Props) {
       </div>
 
       <button
+        onClick={() => {
+          setDisabled(true);
+
+          SocketInstance?.emit(
+            "upgrade",
+            localStorage.getItem("token"),
+            id,
+            (data: GetInfoAck) => {
+              if (data.balance >= 0) {
+                onClose();
+              }
+
+              setDisabled(false);
+            }
+          );
+        }}
+        disabled={isDisabled}
         style={{
           padding: "16px",
           backgroundColor: "#1F26B2",

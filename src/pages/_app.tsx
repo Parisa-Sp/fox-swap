@@ -1,7 +1,10 @@
 import Layout from "@/components/Layout";
+import { SocketHelper } from "@/helpers/socket";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import localFont from "next/font/local";
+import { useEffect } from "react";
+import { io } from "socket.io-client";
 
 const myFont = localFont({
   src: [
@@ -32,6 +35,14 @@ type Props = AppProps & { Component: { noLayout: boolean } };
 
 export default function App({ Component, pageProps }: Props) {
   const noLayout = Component.noLayout;
+
+  useEffect(() => {
+    SocketHelper.connect();
+
+    return () => {
+      SocketHelper.disconnect();
+    };
+  }, []);
 
   return (
     <Layout className={myFont.className} noLayout={noLayout}>

@@ -29,7 +29,7 @@ export default function ScoreBar(props: Props) {
       >
         <Image src={"/flash.png"} alt="flash" width={24} height={24} />
         <div style={{ color: "white" }}>
-          {current}/{max}
+          {current < 0 ? 0 : current}/{max}
         </div>
       </div>
 

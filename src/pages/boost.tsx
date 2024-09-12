@@ -1,10 +1,31 @@
 import BoostItem from "@/components/Boost/Item";
-import Image from "next/image";
+import { SocketInstance } from "@/helpers/socket";
+import type { GetUpgradesAck } from "@/types";
+import { useEffect, useState } from "react";
 
 export default function Boost() {
+  const [data, setData] = useState<GetUpgradesAck[]>([]);
+  const [retry, setRetry] = useState(0);
+
+  useEffect(() => {
+    if (SocketInstance) {
+      SocketInstance.emit(
+        "getUpgrades",
+        localStorage.getItem("token"),
+        (data: GetUpgradesAck[]) => {
+          console.log(data);
+
+          setData(data);
+        }
+      );
+    } else {
+      setRetry(retry + 1);
+    }
+  }, [retry]);
+
   return (
     <>
-      <div style={{ color: "white", fontWeight: "bold", marginTop: "32px" }}>
+      {/* <div style={{ color: "white", fontWeight: "bold", marginTop: "32px" }}>
         Your daily boosters :
       </div>
       <div
@@ -72,7 +93,7 @@ export default function Boost() {
             <div>3/3</div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div style={{ color: "white", fontWeight: "bold", marginTop: "32px" }}>
         Boosters:
@@ -86,30 +107,20 @@ export default function Boost() {
           gap: "8px",
         }}
       >
-        <BoostItem
-          image="/flash.png"
-          level={10}
-          price="100000"
-          title="Taping Guru"
-        />
-        <BoostItem
-          image="/flash.png"
-          level={10}
-          price="100000"
-          title="Taping Guru"
-        />
-        <BoostItem
-          image="/flash.png"
-          level={10}
-          price="100000"
-          title="Taping Guru"
-        />
-        <BoostItem
-          image="/flash.png"
-          level={10}
-          price="100000"
-          title="Taping Guru"
-        />
+        {data.map((item) => (
+          <BoostItem
+            update={() => {
+              setRetry(retry + 1);
+            }}
+            key={item.id}
+            id={item.id}
+            image="/flash.png"
+            level={item.userLevel}
+            price={String(item.cost)}
+            title={item.name}
+            description={item.description}
+          />
+        ))}
       </div>
     </>
   );

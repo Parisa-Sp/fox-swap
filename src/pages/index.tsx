@@ -1,13 +1,15 @@
 import ScoreBar from "@/components/Home/ScoreBar";
+import { SocketInstance } from "@/helpers/socket";
+import type { GetInfoAck, GetMaxAck } from "@/types";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
-const maxCount = 6000;
-const rate = 10;
-const rechargingSpeed = 10;
-
 export default function Home() {
-  const [count, setCount] = useState(maxCount);
+  const [score, setScore] = useState(0);
+  const [count, setCount] = useState(0);
+  const [rate, setRate] = useState(0);
+  const [maxCount, setMaxCount] = useState(0);
+  const [retry, setRetry] = useState(0);
 
   const interval = useRef<NodeJS.Timeout>();
 
@@ -15,13 +17,52 @@ export default function Home() {
     if (interval.current) clearInterval(interval.current);
 
     interval.current = setInterval(() => {
-      if (count + rechargingSpeed <= maxCount) {
-        setCount((prevCount) => prevCount + rechargingSpeed);
-      }
+      SocketInstance?.emit(
+        "getEnergy",
+        localStorage.getItem("token"),
+        (data: GetInfoAck) => {
+          if (data.balance >= 0) {
+            setScore(data.balance);
+            setCount(data.energy);
+          } else {
+            console.log(data);
+          }
+        }
+      );
     }, 1000);
 
     return () => clearInterval(interval.current);
   }, [count]);
+
+  useEffect(() => {
+    if (SocketInstance) {
+      SocketInstance.emit(
+        "getInfo",
+        localStorage.getItem("token"),
+        (data: GetInfoAck) => {
+          if (data.balance >= 0) {
+            setScore(data.balance);
+            setCount(data.energy);
+          } else {
+            console.log(data);
+          }
+        }
+      );
+
+      SocketInstance.emit(
+        "getMax",
+        localStorage.getItem("token"),
+        (data: GetMaxAck) => {
+          setRate(data.tapRate);
+          setMaxCount(data.energyLimit);
+
+          console.log(data);
+        }
+      );
+    } else {
+      setRetry(retry + 1);
+    }
+  }, [retry]);
 
   return (
     <>
@@ -50,17 +91,18 @@ export default function Home() {
             height={200}
             onClick={(e) => {
               if (count - rate >= 0) {
-                setCount((prevCount) => prevCount - rate);
-
-                const score = localStorage.getItem("score");
-                if (score) {
-                  localStorage.setItem(
-                    "score",
-                    (Number(score) + rate).toString()
-                  );
-                } else {
-                  localStorage.setItem("score", rate.toString());
-                }
+                SocketInstance?.emit(
+                  "click",
+                  localStorage.getItem("token"),
+                  (data: GetInfoAck) => {
+                    if (data.balance >= 0) {
+                      setCount(data.energy);
+                      setScore(data.balance);
+                    } else {
+                      console.log(data);
+                    }
+                  }
+                );
 
                 // [x] get x and y position of click or touch in coin image
                 const x = e.clientX;
@@ -117,11 +159,7 @@ export default function Home() {
         }}
       >
         <Image src={"/dollar.png"} alt="coin" width={24} height={24} />
-        <div style={{ color: "white" }}>
-          {typeof window === "undefined"
-            ? 0
-            : localStorage.getItem("score") || 0}
-        </div>
+        <div style={{ color: "white" }}>{score}</div>
       </div>
 
       <ScoreBar current={count} max={maxCount} />
