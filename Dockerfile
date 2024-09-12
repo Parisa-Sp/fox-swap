@@ -8,7 +8,7 @@ ARG RELEASE
 WORKDIR /app
 
 # Installing dependencies
-COPY package.json .npmrc .yarnrc.yml ./
+COPY package.json ./
 RUN yarn install
 
 # Copying source files
