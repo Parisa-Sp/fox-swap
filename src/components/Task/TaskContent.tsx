@@ -1,5 +1,5 @@
 import Image from "next/image";
-import TaskDetail from "./detail";
+import TaskDetail from "./Detail";
 
 type Props = {
   title: string;
