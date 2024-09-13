@@ -1,22 +1,17 @@
-import Image from "next/image";
+import Loading from "@/components/Kit/Loading";
+import useGetStats from "@/hooks/useGetStats";
 
-type Props = {
-  TotalShare: number;
-  TotalTouches: number;
-  TotalPlayers: number;
-  DailyUsers: number;
-  OnlinePalyers: number;
-};
+export default function Stats() {
+  const { data } = useGetStats();
 
-export default function Stats(props: Props) {
-  const { TotalShare, TotalTouches, TotalPlayers, DailyUsers, OnlinePalyers } =
-    props;
+  if (!data) return <Loading />;
+
   const stats = [
-    ["Total Share Balance:", TotalShare],
-    ["Total Touches:", TotalTouches],
-    ["Total Players:", TotalPlayers],
-    ["Daily Users:", DailyUsers],
-    ["Online Players:", OnlinePalyers],
+    ["Total Share Balance:", data?.totalShare],
+    ["Total Touches:", data?.totalTouches],
+    ["Total Players:", data?.totalPlayers],
+    ["Daily Users:", data?.dailyUsers],
+    ["Online Players:", data?.onlinePlayers],
   ];
 
   return (

@@ -10,8 +10,9 @@ export const SocketHelper = {
 
     if (!localStorage.getItem("token")) {
       try {
-        const result = await (
-          await fetch("https://coint-socket.darkube.app/register", {
+        const result = await fetch(
+          "https://coint-socket.darkube.app/register",
+          {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -20,10 +21,14 @@ export const SocketHelper = {
             body: JSON.stringify({
               phoneNumber: Math.random(),
             }),
-          })
-        ).json();
+          }
+        );
 
-        localStorage.setItem("token", result.token);
+        if (result.ok) {
+          localStorage.setItem("token", (await result.json()).token);
+        } else {
+          alert("Server Error!");
+        }
       } catch (e) {
         console.log(e);
       }
@@ -31,7 +36,7 @@ export const SocketHelper = {
   },
 
   disconnect() {
-    if (SocketInstance) {
+    if (SocketInstance && localStorage.getItem("token")) {
       SocketInstance.disconnect();
     }
   },

@@ -1,4 +1,5 @@
 import ScoreBar from "@/components/Home/ScoreBar";
+import Loading from "@/components/Kit/Loading";
 import { SocketInstance } from "@/helpers/socket";
 import type { GetInfoAck, GetMaxAck } from "@/types";
 import Image from "next/image";
@@ -6,9 +7,9 @@ import { useEffect, useRef, useState } from "react";
 
 export default function Home() {
   const [score, setScore] = useState(0);
-  const [count, setCount] = useState(0);
+  const [energy, setEnergy] = useState(0);
   const [rate, setRate] = useState(0);
-  const [maxCount, setMaxCount] = useState(0);
+  const [maxEnergy, setMaxEnergy] = useState(0);
   const [retry, setRetry] = useState(0);
 
   const interval = useRef<NodeJS.Timeout>();
@@ -17,32 +18,34 @@ export default function Home() {
     if (interval.current) clearInterval(interval.current);
 
     interval.current = setInterval(() => {
-      SocketInstance?.emit(
-        "getEnergy",
-        localStorage.getItem("token"),
-        (data: GetInfoAck) => {
-          if (data.balance >= 0) {
-            setScore(data.balance);
-            setCount(data.energy);
-          } else {
-            console.log(data);
+      if (SocketInstance && localStorage.getItem("token")) {
+        SocketInstance.emit(
+          "getEnergy",
+          localStorage.getItem("token"),
+          (data: GetInfoAck) => {
+            if (data.balance >= 0) {
+              setScore(data.balance);
+              setEnergy(data.energy);
+            } else {
+              console.log(data);
+            }
           }
-        }
-      );
+        );
+      }
     }, 1000);
 
     return () => clearInterval(interval.current);
-  }, [count]);
+  }, [energy]);
 
   useEffect(() => {
-    if (SocketInstance) {
+    if (SocketInstance && localStorage.getItem("token")) {
       SocketInstance.emit(
         "getInfo",
         localStorage.getItem("token"),
         (data: GetInfoAck) => {
           if (data.balance >= 0) {
             setScore(data.balance);
-            setCount(data.energy);
+            setEnergy(data.energy);
           } else {
             console.log(data);
           }
@@ -54,7 +57,7 @@ export default function Home() {
         localStorage.getItem("token"),
         (data: GetMaxAck) => {
           setRate(data.tapRate);
-          setMaxCount(data.energyLimit);
+          setMaxEnergy(data.energyLimit);
 
           console.log(data);
         }
@@ -63,6 +66,10 @@ export default function Home() {
       setRetry(retry + 1);
     }
   }, [retry]);
+
+  if (!rate || !maxEnergy || !energy) {
+    return <Loading />;
+  }
 
   return (
     <>
@@ -90,13 +97,13 @@ export default function Home() {
             width={200}
             height={200}
             onClick={(e) => {
-              if (count - rate >= 0) {
+              if (energy - rate >= 0) {
                 SocketInstance?.emit(
                   "click",
                   localStorage.getItem("token"),
                   (data: GetInfoAck) => {
                     if (data.balance >= 0) {
-                      setCount(data.energy);
+                      setEnergy(data.energy);
                       setScore(data.balance);
                     } else {
                       console.log(data);
@@ -162,7 +169,7 @@ export default function Home() {
         <div style={{ color: "white" }}>{score}</div>
       </div>
 
-      <ScoreBar current={count} max={maxCount} />
+      <ScoreBar current={energy} max={maxEnergy} />
     </>
   );
 }

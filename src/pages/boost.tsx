@@ -8,7 +8,7 @@ export default function Boost() {
   const [retry, setRetry] = useState(0);
 
   useEffect(() => {
-    if (SocketInstance) {
+    if (SocketInstance && localStorage.getItem("token")) {
       SocketInstance.emit(
         "getUpgrades",
         localStorage.getItem("token"),

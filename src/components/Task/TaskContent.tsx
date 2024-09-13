@@ -6,10 +6,17 @@ type Props = {
   description: string;
   price: number;
   isCompleted?: boolean;
+  subTasks: {
+    title: string;
+    id: string;
+    link: string;
+    isDone: boolean;
+  }[];
+  update: VoidFunction;
 };
 
 export default function TaskContent(props: Props) {
-  const { description, isCompleted, price, title } = props;
+  const { description, isCompleted, price, title, subTasks, update } = props;
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
@@ -54,11 +61,16 @@ export default function TaskContent(props: Props) {
 
       <div style={{ color: "white", marginTop: "32px" }}>Your tasks</div>
 
-      <TaskDetail name="Join the Telegram chat" />
-
-      <TaskDetail name="Follow X handle" />
-
-      <TaskDetail name="Visit website" />
+      {subTasks.map((task) => (
+        <TaskDetail
+          update={update}
+          name={task.title}
+          url={task.link}
+          key={task.id}
+          isDone={task.isDone}
+          id={task.id}
+        />
+      ))}
     </div>
   );
 }

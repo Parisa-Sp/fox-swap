@@ -1,3 +1,5 @@
+import ClipboardHelper from "@/utils/clipboard";
+
 type Props = {
   inviteLink: string;
   referals: number;
@@ -41,6 +43,9 @@ export default function invite(props: Props) {
             My invite link:
           </div>
           <div
+            onClick={() => {
+              ClipboardHelper.copy("https://t.me/gsttydfgdfg");
+            }}
             style={{
               cursor: "pointer",
               backgroundColor: "white",

@@ -9,7 +9,7 @@ export default function Header() {
         justifyContent: "space-between",
       }}
     >
-      <Avatar name="Mamad" src="/avatar.png" alt="Avatar" />
+      <Avatar name="CEO" src="/avatar.png" alt="Avatar" />
     </div>
   );
 }

@@ -24,3 +24,28 @@ export type GetMaxAck = {
   energyRecovery: number;
   tapRate: number;
 };
+
+export type GetStatsAck = {
+  totalShare: number;
+  totalTouches: number;
+  totalPlayers: number;
+  dailyUsers: number;
+  onlinePlayers: number;
+};
+
+export type GetTasksAck = Record<
+  string,
+  {
+    title: string;
+    id: string;
+    description: string;
+    reward: number;
+    isDone: boolean;
+    subTasks: {
+      id: string;
+      title: string;
+      link: string;
+      isDone: boolean;
+    }[];
+  }
+>;
